@@ -21,3 +21,23 @@ change to other project in cloud shell
 ```
 gcloud config set project $PROJECT_ID
 ```
+
+## check vm commands
+
+unused and used memory and swap space
+```
+free
+```
+details about the RAM
+```
+sudo dmidecode -t 17
+```
+verify the number of processors
+```
+nproc
+```
+details about the CPUs
+```
+lscpu
+```
+
