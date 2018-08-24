@@ -49,3 +49,22 @@ sudo apt-get install -y screen
 sudo screen -S mcs java -Xms1G -Xmx7G -d64 -jar /home/minecraft/minecraft_server.1.11.2.jar nogui
 ```
 
+### Minecraft 
+
+Minecraft server source
+```
+sudo wget https://s3.amazonaws.com/Minecraft.Download/versions/1.11.2/minecraft_server.1.11.2.jar
+```
+
+Run the server
+```
+sudo screen -S mcs java -Xms1G -Xmx7G -d64 -jar /home/minecraft/minecraft_server.1.11.2.jar nogui
+```
+
+backup script, connect to your bucket
+```
+#!/bin/bash
+screen -r mcs -X stuff '/save-all\n/save-off\n'
+/usr/bin/gsutil cp -R ${BASH_SOURCE%/*}/world gs://${YOUR_BUCKET_NAME}-minecraft-backup/$(date "+%Y%m%d-%H%M%S")-world
+screen -r mcs -X stuff '/save-on\n'
+```
