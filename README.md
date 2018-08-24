@@ -82,3 +82,9 @@ mount /dev/disk/by-id/google-minecraft-disk /home/minecraft
 cd /home/minecraft
 screen -d -m -S mcs java -Xms1G -Xmx7G -d64 -jar minecraft_server.1.11.2.jar nogui
 ```
+key: ```shutdown-script```
+value: 
+```
+#!/bin/bash
+sudo screen -r -X stuff '/stop\n'
+```
