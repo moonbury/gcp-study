@@ -41,3 +41,11 @@ details about the CPUs
 lscpu
 ```
 
+### screen
+
+we can use screen instead of &
+```
+sudo apt-get install -y screen
+sudo screen -S mcs java -Xms1G -Xmx7G -d64 -jar /home/minecraft/minecraft_server.1.11.2.jar nogui
+```
+
