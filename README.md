@@ -68,3 +68,17 @@ screen -r mcs -X stuff '/save-all\n/save-off\n'
 /usr/bin/gsutil cp -R ${BASH_SOURCE%/*}/world gs://${YOUR_BUCKET_NAME}-minecraft-backup/$(date "+%Y%m%d-%H%M%S")-world
 screen -r mcs -X stuff '/save-on\n'
 ```
+
+
+### Maintenance
+since there are maintenance period in gcp, it will stop your server. Need to auto mount the disk and run the scripts.
+To do so, edit the VM and create a custom metadata with 
+key: ```startup-script```
+value:
+```
+#!/bin/bash
+mount /dev/disk/by-id/google-minecraft-disk /home/minecraft
+(crontab -l ; echo "0 */4 * * * /home/minecraft/backup.sh")| crontab -
+cd /home/minecraft
+screen -d -m -S mcs java -Xms1G -Xmx7G -d64 -jar minecraft_server.1.11.2.jar nogui
+```
